@@ -1,6 +1,6 @@
 #---------
 #
-# CppUTest Examples Makefile
+# (copied from) CppUTest Examples Makefile
 #
 #----------
 
@@ -10,8 +10,8 @@ ifndef SILENCE
 endif
 
 #--- Inputs ----#
-COMPONENT_NAME = CppUTestExamples
-CPPUTEST_HOME = ..
+COMPONENT_NAME = TPLink
+CPPUTEST_HOME = ../cpputest
 
 CPPUTEST_USE_EXTENSIONS = Y
 CPP_PLATFORM = Gcc
@@ -19,18 +19,19 @@ CPP_PLATFORM = Gcc
 # This line is overriding the default new macros.  This is helpful
 # when using std library includes like <list> and other containers
 # so that memory leak detection does not conflict with stl.
-CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ApplicationLib/ExamplesNewOverrides.h
+### CPPUTEST_MEMLEAK_DETECTOR_NEW_MACRO_FILE = -include ApplicationLib/ExamplesNewOverrides.h
 SRC_DIRS = \
-	ApplicationLib
+	src
 
 TEST_SRC_DIRS = \
-	AllTests
+	tests
 
 INCLUDE_DIRS =\
   .\
-  ApplicationLib\
+  inc\
   $(CPPUTEST_HOME)/include\
 
-include $(CPPUTEST_HOME)/build/MakefileWorker.mk
+include build/MakefileWorker.mk
+### include $(CPPUTEST_HOME)/build/MakefileWorker.mk
 
 
