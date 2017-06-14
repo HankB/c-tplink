@@ -24,8 +24,9 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
+// #include "CppUTest/TestHarness.h"
 #include "CppUTest/CommandLineTestRunner.h"
+
 /*
 #include "CppUTest/TestPlugin.h"
 #include "CppUTest/TestRegistry.h"
@@ -47,6 +48,8 @@ public:
     }
 };
 */
+
+
 int main(int ac, char** av)
 {
 /*
