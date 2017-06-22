@@ -1,4 +1,4 @@
-/** @file endecrypt.c encrypt/decryptr messages to/from HS100
+/** @file endecrypt.c encrypt/decrypt messages to/from HS100
  * and similar devices.
  */
 
