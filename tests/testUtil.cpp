@@ -12,6 +12,7 @@ TEST_GROUP(endecrypt){
 
     void teardown(){}
 };
+// encoded portion of message (follows the first 4 bytes of the TCP payload)
 static const unsigned char encoded[] = {
     0xd0, 0xf2, 0x81, 0xf8, 0x8b, 0xff, 0x9a, 0xf7, 
     0xd5, 0xef, 0x94, 0xb6, 0xc5, 0xa0, 0xd4, 0x8b,
@@ -24,6 +25,8 @@ static const unsigned char encoded[] = {
 #define BUFLEN  512
 char            decoded[BUFLEN];
 unsigned char   re_encoded[BUFLEN];
+
+// decoded portion of the payload - corresponds to encoded[] after decryption
 const  char *   json = "{\"system\":{\"set_relay_state\":{\"err_code\":0}}}";
 
 TEST(endecrypt, test_endecrypt)
