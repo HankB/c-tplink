@@ -23,16 +23,16 @@ static const unsigned char encoded[] = {
 };
 
 #define BUFLEN  512
-char            decoded[BUFLEN];
-unsigned char   re_encoded[BUFLEN];
+static char     decoded[BUFLEN];
+static unsigned char   re_encoded[BUFLEN];
 
 // decoded portion of the payload - corresponds to encoded[] after decryption
-const  char *   json = "{\"system\":{\"set_relay_state\":{\"err_code\":0}}}";
+static const char * json = "{\"system\":{\"set_relay_state\":{\"err_code\":0}}}";
 
 TEST(endecrypt, test_endecrypt)
 {
-    CHECK(BUFLEN > (sizeof encoded+1))
-    STRCMP_EQUAL(json, decrypt(encoded, decoded, sizeof encoded))
-    unsigned char * result = encrypt(json, re_encoded, strlen(json));
-    CHECK(memcmp(encoded, result, strlen(json)) == 0)
+    CHECK(BUFLEN > (sizeof encoded+1)) // guarantee adequate buffer length
+    STRCMP_EQUAL(json, decrypt(encoded, decoded, sizeof encoded)) // decrypt msg'
+    unsigned char * result = encrypt(json, re_encoded, strlen(json)); // encrypt
+    CHECK(memcmp(encoded, result, strlen(json)) == 0) // verify encryption
 }
