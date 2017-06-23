@@ -19,7 +19,7 @@
 unsigned char *buildOutgoing(const char* msg, unsigned char *buf)
 {
     size_t inLen = strlen(msg);
-    memset( buf, 4, sizeof(unsigned char));
+    memset( buf, '\0', sizeof(unsigned char));
     encrypt(msg, buf+4, inLen);
     return buf;
 }
