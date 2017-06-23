@@ -16,7 +16,7 @@
  * @note - the buffer passed in must be 4 bytes longer than the
  *  JSON string.
  */
-static unsigned char *buildOutgoing(const char* msg, unsigned char *buf)
+unsigned char *buildOutgoing(const char* msg, unsigned char *buf)
 {
     size_t inLen = strlen(msg);
     memset( buf, 4, sizeof(unsigned char));
