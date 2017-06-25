@@ -8,8 +8,10 @@ code to control TP-Link IoT devices written in C
 3) Compare this sort of developemnt with Go (as done with https://github.com/HankB/orvibo)
 
 ## Status
+
 Initial effort will support a plug (HS100)
-* (dummy) cppunit test implemented
+* cppunit test implemented
+* Started coding sendMsg() and related tests.
 
 ## Requirements
 
@@ -25,3 +27,7 @@ cd c-tplink
 export CPPUTEST_HOME=../cpputest
 make
 ```
+
+## Errata and limits
+
+* Does not support IPV6
