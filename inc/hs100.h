@@ -3,6 +3,18 @@
 #ifndef HS100_H
 #define HS100_H
 
-unsigned char *buildOutgoing(const char* msg, unsigned char *buf);
+enum TPLINK_STATUS
+{
+    TPLNK_OK = 0,       // process completed OK
+    TPLNK_NOIP = -1,    // can't resolve host name
+    TPLNK_NOHOST = -2,  // can't connect to host
+    TPLNK_NOREPLY = -3, // no reply from host
+    TPLNK_NOSOCK = -4,  // other socket error
+    TPLNK_BADARG = -5,  // invalid argument(s)
+    TPLNK_BUFF = -5,    // insufficient buffer for reply
+};
+
+unsigned char *buildOutgoing(const char *msg, unsigned char *buf);
+enum TPLINK_STATUS sendMsg(const char *host, const char *msg, char *reply, size_t relpyLen);
 
 #endif // HS100_H
