@@ -184,7 +184,7 @@ endif
 ifeq ($(UNAME_OS),$(LINUX_STR))
 	CPPUTEST_WARNINGFLAGS += -Wsign-conversion
 endif
-	CPPUTEST_CXX_WARNINGFLAGS = -Woverloaded-virtual
+	CPPUTEST_CXX_WARNINGFLAGS = -Woverloaded-virtual -fsized-deallocation
 	CPPUTEST_C_WARNINGFLAGS = -Wstrict-prototypes
 endif
 
