@@ -3,6 +3,11 @@
 
 #include <netdb.h>
 #include <string.h>
+#include <stdbool.h>
+
+#include <sys/types.h> /* See NOTES */
+#include <sys/socket.h>
+#include <errno.h>
 
 static struct hostent h;
 static char myhostIP[] = {(char)192, (char)168, 1, 20};
@@ -33,4 +38,32 @@ struct hostent *gethostbyname(const char *name)
         return populateIP(0);
     }
     return NULL;
+}
+
+static bool forceSockErr = false;
+static int sockErr = 0;
+
+bool forceSocketFail(bool force, int err)
+{
+    bool prev = forceSockErr;
+    forceSockErr = force;
+    sockErr = err;
+    return prev;
+}
+
+int socket(int domain, int type, int protocol)
+{
+    if(forceSockErr)
+    {
+        errno = sockErr;
+        return -1;
+    }
+
+    if(domain == AF_INET && type == SOCK_STREAM && protocol == 0 )
+    {
+        return 3;   // return a valid socket number
+    }
+
+    errno = EINVAL;
+    return -1;
 }
