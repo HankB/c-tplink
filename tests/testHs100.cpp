@@ -3,9 +3,12 @@
 extern "C" {
 #include "util.h"
 #include "hs100.h"
+#include "socketSpyMock.h"
 #include <string.h>
 #include <memory.h>
 }
+
+
 
 TEST_GROUP(hs100){
     void setup(){}
@@ -41,4 +44,11 @@ TEST(hs100, test_sendMsg)
     CHECK(sendMsg("something.invalid", json, (char *)encoded, sizeof(encoded)) == TPLNK_NOIP)
     CHECK(sendMsg("myhost", json, (char *)encoded, sizeof(encoded)) == TPLNK_OK)
     CHECK(sendMsg("missing.ip", json, (char *)encoded, sizeof(encoded)) == TPLNK_NOIP)
+
+    forceSocketFail(true, EACCES);
+    CHECK(sendMsg("myhost", json, (char *)encoded, sizeof(encoded)) == TPLNK_NOSOCK)
+    forceSocketFail(false, EACCES);
+    CHECK(sendMsg("myhost", json, (char *)encoded, sizeof(encoded)) == TPLNK_OK)
+
+
 }
