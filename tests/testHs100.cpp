@@ -6,6 +6,7 @@ extern "C" {
 #include "socketSpyMock.h"
 #include <string.h>
 #include <memory.h>
+#include <errno.h>
 }
 
 

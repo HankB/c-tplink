@@ -3,6 +3,8 @@
 #ifndef HS100_H
 #define HS100_H
 
+#include <stdint.h>
+
 enum TPLINK_STATUS
 {
     TPLNK_OK = 0,       // process completed OK
