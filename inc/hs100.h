@@ -14,6 +14,8 @@ enum TPLINK_STATUS
     TPLNK_BUFF = -5,    // insufficient buffer for reply
 };
 
+static const uint16_t port = 9999;
+
 unsigned char *buildOutgoing(const char *msg, unsigned char *buf);
 enum TPLINK_STATUS sendMsg(const char *host, const char *msg, char *reply, size_t relpyLen);
 
