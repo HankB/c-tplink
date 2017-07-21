@@ -39,9 +39,9 @@ enum TPLINK_STATUS sendMsg(const char *host, const char *msg, char *reply, size_
     assert(reply != NULL);
     assert(relpyLen > 0);
 
+    // get IP for host
     struct hostent *hent = gethostbyname(host);
-    (void)(hent);
-    printf("hostent %p\n", (void *)hent);
+
     if (hent != NULL)
     {
         if (hent->h_addr == 0)
@@ -61,6 +61,21 @@ enum TPLINK_STATUS sendMsg(const char *host, const char *msg, char *reply, size_
     else
     {
         return TPLNK_NOIP;
+    }
+
+    // have IP addr, copy to struct sockaddr_in
+    struct sockaddr_in server;
+    memset(&server, 0, sizeof server); // clear previous contents
+    (void)(server);
+    bcopy(hent->h_addr, &(server.sin_addr.s_addr), (size_t)hent->h_length);
+    assert(sizeof server.sin_addr.s_addr >= (unsigned int)hent->h_length);
+    server.sin_port = htons(port);
+
+    // get a socket
+    int s = socket(AF_INET, SOCK_STREAM, 0);
+    if(s < 0)
+    {
+        return TPLNK_NOSOCK;
     }
 
     return TPLNK_OK;
