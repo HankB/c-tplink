@@ -8,6 +8,7 @@
 // #include <sys/socket.h>
 #include <netdb.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "util.h"
 #include "hs100.h"
 
@@ -78,5 +79,10 @@ enum TPLINK_STATUS sendMsg(const char *host, const char *msg, char *reply, size_
         return TPLNK_NOSOCK;
     }
 
+    // connect the socket
+    if(connect(s, (struct sockaddr *)&server, sizeof server) < 0)
+    {
+        close(s);
+    }
     return TPLNK_OK;
 }
