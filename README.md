@@ -32,3 +32,4 @@ make
 ## Errata and limits
 
 * Does not support IPV6
+* Project includes .vscode (Visual Studio Code) settings for better or worse. Not sure if this is a good idea.
