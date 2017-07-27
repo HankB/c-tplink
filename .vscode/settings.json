@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "stringfwd.h": "c",
+        "assert.h": "c",
+        "in.h": "c",
+        "hs100.c": "cpp",
+        "socketspymock.c": "cpp"
+    }
+}
