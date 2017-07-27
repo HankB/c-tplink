@@ -50,6 +50,6 @@ TEST(hs100, test_sendMsg)
     CHECK(sendMsg("myhost", json, (char *)encoded, sizeof(encoded)) == TPLNK_NOSOCK)
     forceSocketFail(false, EACCES);
     CHECK(sendMsg("myhost", json, (char *)encoded, sizeof(encoded)) == TPLNK_OK)
-
+    CHECK(getActiveSocketCount() == 0)
 
 }

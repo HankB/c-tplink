@@ -4,7 +4,7 @@
 #include <netdb.h>
 #include <string.h>
 #include <stdbool.h>
-
+#include <assert.h>
 #include <sys/types.h> /* See NOTES */
 #include <sys/socket.h>
 #include <errno.h>
@@ -42,6 +42,8 @@ struct hostent *gethostbyname(const char *name)
 
 static bool forceSockErr = false;
 static int sockErr = 0;
+static int activeSocketCount = 0;   // used to track open/close symmetry for socket oeprations
+static int  socketProvided = 5;     // we'll provide this for the socket number
 
 bool forceSocketFail(bool force, int err)
 {
@@ -61,9 +63,22 @@ int socket(int domain, int type, int protocol)
 
     if(domain == AF_INET && type == SOCK_STREAM && protocol == 0 )
     {
-        return 3;   // return a valid socket number
+        activeSocketCount++;
+        return ++socketProvided;   // return a valid socket number
     }
 
     errno = EINVAL;
     return -1;
+}
+
+int close(int fd)
+{
+    assert(fd == socketProvided);
+    activeSocketCount--;
+    return 0;
+}
+
+int getActiveSocketCount(void)
+{
+    return activeSocketCount;
 }

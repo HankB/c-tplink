@@ -4,6 +4,7 @@
 #define SOCKETSPYMOCK_H
 
 bool forceSocketFail(bool force, int err);
+int getActiveSocketCount(void);
 
 
 #endif // SOCKETSPYMOCK_H
