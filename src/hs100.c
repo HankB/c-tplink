@@ -80,9 +80,22 @@ enum TPLINK_STATUS sendMsg(const char *host, const char *msg, char *reply, size_
     }
 
     // connect the socket
-    if(connect(s, (struct sockaddr *)&server, sizeof server) < 0)
+    if (connect(s, (struct sockaddr *)&server, sizeof server) < 0)
     {
         close(s);
+        return TPLNK_NOHOST;
     }
+
+    // arrive here with a connected socket - Whee!!! Time to send/receive a packet.
+
+    char *sendBuf = malloc(strlen(msg) + 4);
+    if (sendBuf == 0)
+    {
+        close(s);
+        return TPLNK_BUFF;
+    }
+
+    free(sendBuf);
+    close(s);
     return TPLNK_OK;
 }
