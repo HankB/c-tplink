@@ -82,3 +82,11 @@ int getActiveSocketCount(void)
 {
     return activeSocketCount;
 }
+
+int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen)
+{
+    (void)(sockfd);
+    (void)(addr);
+    (void)(addrlen);
+    return 0;
+}
