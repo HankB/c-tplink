@@ -13,7 +13,7 @@ enum TPLINK_STATUS
     TPLNK_NOREPLY = -3, // no reply from host
     TPLNK_NOSOCK = -4,  // other socket error
     TPLNK_BADARG = -5,  // invalid argument(s)
-    TPLNK_BUFF = -5     // insufficient buffer for reply
+    TPLNK_BUFF = -5     // insufficient buffer for send/reply
 };
 
 static const uint16_t port = 9999;
